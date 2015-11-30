@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>CONSULTA ACADEMICA U.G.</title>
+    </h:head>
+    <h:body>
+        <h:form id="Datos">
+            <center>
+                <h3>Integrantes:</h3>
+                <h5>Briones Jessenia</h5>
+                <h5>Mera Liza</h5>
+                <h5>Paguay Daniel</h5>
+                <h5>Tabares Fernando</h5>
+            <p:panelGrid id="DatosEstudianteConsultar" style="font-size: small ;width: 79%">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column>" DATOS DEL ESTUDIANTE A CONSULTAR "</p:column> 
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column>
+                        <center>
+                        <p:outputLabel value="CEDULA:"/>
+                        <h:inputText value="#{beanView.cedula}"/>
+                        </center>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <center>
+                        <p:outputLabel value="PERIODO: "/>
+                        <p:selectOneRadio id="genero" value="#{beanView.ciclo}">
+                            <f:selectItem itemLabel="#{beanView.periodos}" itemValue="15120001" />
+                            <!--<f:selectItem itemLabel="2013 - 2014 CII" itemValue="15120002" />-->
+                        </p:selectOneRadio>
+                        </center>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <center>
+                        <p:commandButton value="BUSCAR" actionListener="#{beanView.consegirDatos()}"
+                             update=":formTablaDatos"/>
+                        </center>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+            </center>
+        </h:form>
+        <br></br><br></br><br></br><br></br>
+    
+        
+        <h:form id="formTablaDatos">   
+            <h:outputLabel value="   ESTUDIANTE:  #{beanView.nomEstudiante}"/><br></br>
+            <h:outputLabel value="   CARRERA:   #{beanView.carreraEstudiante}"/>
+            <p:dataTable id="datosestudiante" var="estu" value="#{beanView.notas}"                
+                             paginator="true" rows="10" style="margin-bottom:20px; font-size: small">
+                <p:column headerText="MATERIA" style="width: 150px; text-align: center">
+                    <h:outputText value="#{estu.nom_materia}"/>
+                </p:column>
+                <p:column headerText="NOTA ACADEMICA I" style="text-align: center">
+                    <h:outputText value="#{estu.primer_academica}"/>
+                </p:column>
+                <p:column headerText="EVALUACIÓN I" style="text-align: center">
+                    <h:outputText value="#{estu.primer_evaluacion}" />
+                </p:column>
+                <p:column headerText="PROMEDIO I" style="text-align: center">
+                    <h:outputText value="#{estu.primer_promedio}" />
+                </p:column>                
+                <p:column headerText="NOTA ACADEMICA II" style="text-align: center">
+                    <h:outputText value="#{estu.segundo_academica}" />
+                </p:column>
+                <p:column headerText="EVALUACION II" style="text-align: center">
+                    <h:outputText value="#{estu.segundo_evaluacion}" />
+                </p:column>
+                <p:column headerText="PROMEDIO II" style="text-align: center">
+                    <h:outputText value="#{estu.segundo_promedio}" />
+                </p:column>
+                <p:column headerText="PROMEDIO FINAL" style="text-align: center">
+                    <h:outputText value="#{estu.promedio}" />
+                </p:column>
+                </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
